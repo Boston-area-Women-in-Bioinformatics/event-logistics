@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BWiB Event Planning Checklist</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1a7f5a;
+    --green-light: #e6f4ef;
+    --green-mid: #b2ddd0;
+    --green-dark: #0f5940;
+    --text: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #999;
+    --border: #e2e2e2;
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem 1rem 4rem;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .org-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+
+  /* Progress */
+  .progress-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-numbers {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--green);
+    white-space: nowrap;
+    min-width: 64px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .progress-right {
+    flex: 1;
+  }
+
+  .progress-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.35s ease;
+  }
+
+  .progress-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* Congrats */
+  .congrats {
+    display: none;
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    border-radius: var(--radius);
+    padding: 0.85rem 1.25rem;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--green-dark);
+    margin-bottom: 1.5rem;
+  }
+  .congrats.show { display: block; }
+
+  /* Phase */
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+  }
+
+  .phase-header:hover {
+    background: #f5f5f3;
+  }
+
+  .phase-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    min-width: 20px;
+  }
+
+  .phase-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .phase-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: #f0f0ee;
+    border: 1px solid var(--border);
+    padding: 2px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .phase-badge.complete {
+    background: var(--green-light);
+    color: var(--green-dark);
+    border-color: var(--green-mid);
+  }
+
+  .phase-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .phase-arrow.open {
+    transform: rotate(180deg);
+  }
+
+  .phase-body {
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .phase-body.collapsed {
+    display: none;
+  }
+
+  /* Items */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 1.25rem;
+    cursor: pointer;
+    transition: background 0.1s;
+    border-bottom: 1px solid #f0f0ee;
+  }
+
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: #fafaf7; }
+
+  .item.done .item-text {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+    text-decoration-color: var(--text-tertiary);
+  }
+
+  .item.done .item-note {
+    opacity: 0.5;
+  }
+
+  /* Custom checkbox */
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid #c8c8c8;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .checkbox.checked {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .checkmark {
+    display: none;
+    width: 11px;
+    height: 8px;
+  }
+
+  .checkmark path {
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  .checkbox.checked .checkmark {
+    display: block;
+  }
+
+  .item-content { flex: 1; min-width: 0; }
+
+  .item-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .item-note {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+    line-height: 1.5;
+  }
+
+  .item-link {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--green);
+    text-decoration: none;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .item-link:hover { text-decoration: underline; }
+
+  /* Footer */
+  .footer {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  .reset-btn {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: underline;
+  }
+
+  .reset-btn:hover { color: var(--text-secondary); }
+
+  @media (max-width: 520px) {
+    h1 { font-size: 22px; }
+    .progress-section { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .progress-numbers { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="page-header">
+    <div class="org-tag">Boston Women in Bioinformatics</div>
+    <h1>Event planning checklist</h1>
+    <p class="subtitle">Check off items as you go. Tap a phase to collapse it once it's done.</p>
+  </header>
+
+  <div class="progress-section">
+    <div class="progress-numbers" id="progressNumbers">0/0</div>
+    <div class="progress-right">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Getting started…</div>
+    </div>
+  </div>
+
+  <div class="congrats" id="congrats">
+    ✓ All done — your event is ready. Go celebrate.
+  </div>
+
+  <div id="checklist"></div>
+
+  <div class="footer">
+    <span class="footer-note">Created for BWiB event organizers. Update as needed.</span>
+    <button class="reset-btn" onclick="resetAll()">Reset checklist</button>
+  </div>
+
+</div>
+
+<script>
+const phases = [
+  {
+    id: "concept",
+    number: "01",
+    title: "Event concept",
+    items: [
+      { id: "hook", text: "Write a one-sentence hook", note: "What is it, who is it for, and why does it matter?" },
+      { id: "desc", text: "Write the event description (under 300 words)", note: "Include 3–5 concrete takeaways, speaker bios if relevant, and who the event is for (women/gender minorities only, open to all, early career, etc.)." },
+      { id: "format", text: "Decide the format: in-person, virtual, or hybrid" },
+      { id: "capacity", text: "Set an approximate capacity and target audience" },
+      { id: "cta", text: "Write a call to action for the event page", note: 'e.g. "Grab your spot — space is limited!"' },
+    ]
+  },
+  {
+    id: "logistics",
+    number: "02",
+    title: "Logistics",
+    items: [
+      { id: "speakers", text: "Confirm any speakers or facilitators" },
+      { id: "venue", text: "Book a venue or create the virtual link", note: "Common in-person options: CIC, Broad, Harvard i-lab. Confirm AV, Wi-Fi, capacity, food policy, and cancellation terms." },
+      { id: "date", text: "Lock the date and start/end time" },
+      { id: "sponsor", text: "Identify a sponsor if food or costs need covering", note: "Draft a short ask email. Get commitment in writing before publicizing. Confirm logo/shoutout deliverables." },
+    ]
+  },
+  {
+    id: "promotion",
+    number: "03",
+    title: "Promotion — submit at least 2 weeks out",
+    items: [
+      { id: "form", text: "Submit the BWiB Event Promotion Request Form", note: "Then email events@boston-wib.org to let them know you've submitted.", link: "https://docs.google.com/forms/d/e/1FAIpQLScfcIfq8U-dxU5thavC41BDugozCk7hy4qIyR3w0d2L-INi5g/viewform" },
+      { id: "blurb", text: "Write the newsletter blurb (1–2 sentences)", note: "Short and punchy — just enough to make someone click." },
+      { id: "social", text: "Write the social media post (under 3,000 characters)", note: "Lead with the hook in the first 210 characters — that's what shows before 'see more' on LinkedIn/Bluesky." },
+      { id: "fulldesc", text: "Prepare the full event description for the BWiB website", note: "Include speaker bios, takeaways, and any other relevant context. Email to events@boston-wib.org." },
+    ]
+  },
+  {
+    id: "registration",
+    number: "04",
+    title: "Registration (Lu.ma)",
+    items: [
+      { id: "luma", text: "Create the event page in the BWiB Lu.ma workspace", note: "Fill in: title, date/time, timezone, location or virtual link, description, cover image, and capacity limit." },
+      { id: "questions", text: "Add registration questions (max 5)", note: "Suggested: pronouns, job title/org, dietary restrictions (if food), first BWiB event?" },
+      { id: "image", text: "Upload a cover image (at least 1600×900px)", note: "Use Unsplash, Pexels, or Canva with BWiB brand colors. Check that it also looks good cropped square for social sharing." },
+      { id: "preview", text: "Preview the page on mobile before publishing" },
+      { id: "publish", text: "Set to Published and copy the event URL" },
+    ]
+  },
+  {
+    id: "eventday",
+    number: "05",
+    title: "Event day",
+    items: [
+      { id: "reminder", text: "Send a reminder email via Lu.ma (24–48 hours before)", note: "Include: date, time, location or Zoom link, what to bring, food info, and a hard end time." },
+      { id: "materials", text: "Share any prep materials: slides, agenda, or readings" },
+      { id: "tech", text: "Test AV, virtual link, or room setup in advance" },
+    ]
+  },
+  {
+    id: "followup",
+    number: "06",
+    title: "Follow-up",
+    items: [
+      { id: "thankyou", text: "Send a follow-up email within 48 hours", note: "Thank attendees, briefly recap what happened, and link to shared resources or a recording." },
+      { id: "feedback", text: "Include a short feedback form (Google Form, max 5 questions)", note: "Ask: what worked, what would you change, what topics next?" },
+      { id: "sponsor_ty", text: "Send a separate thank-you to sponsors, speakers, and volunteers" },
+      { id: "share", text: "Share aggregate feedback with the organizing team within 1 week" },
+    ]
+  }
+];
+
+const state = {};
+phases.forEach(p => p.items.forEach(i => state[i.id] = false));
+
+function totalItems() { return Object.keys(state).length; }
+function doneItems() { return Object.values(state).filter(Boolean).length; }
+
+function updateProgress() {
+  const total = totalItems(), done = doneItems();
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressNumbers').textContent = done + '/' + total;
+  document.getElementById('progressLabel').textContent =
+    done === 0 ? 'Getting started…' :
+    done === total ? 'Everything complete!' :
+    pct + '% complete — keep going';
+  document.getElementById('congrats').classList.toggle('show', done === total && total > 0);
+
+  phases.forEach(p => {
+    const badge = document.getElementById('badge-' + p.id);
+    if (!badge) return;
+    const done_p = p.items.filter(i => state[i.id]).length;
+    const all = p.items.length;
+    const complete = done_p === all;
+    badge.textContent = complete ? 'done' : done_p + '/' + all;
+    badge.className = 'phase-badge' + (complete ? ' complete' : '');
+  });
+}
+
+function toggleItem(id) {
+  state[id] = !state[id];
+  const el = document.getElementById('item-' + id);
+  const cb = document.getElementById('cb-' + id);
+  el.classList.toggle('done', state[id]);
+  cb.classList.toggle('checked', state[id]);
+  updateProgress();
+}
+
+function togglePhase(id) {
+  const body = document.getElementById('body-' + id);
+  const arrow = document.getElementById('arrow-' + id);
+  const collapsed = body.classList.toggle('collapsed');
+  arrow.classList.toggle('open', !collapsed);
+}
+
+function resetAll() {
+  if (!confirm('Reset all checkboxes?')) return;
+  Object.keys(state).forEach(k => state[k] = false);
+  phases.forEach(p => p.items.forEach(i => {
+    const el = document.getElementById('item-' + i.id);
+    const cb = document.getElementById('cb-' + i.id);
+    if (el) el.classList.remove('done');
+    if (cb) cb.classList.remove('checked');
+  }));
+  updateProgress();
+}
+
+function render() {
+  const container = document.getElementById('checklist');
+  phases.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'phase';
+    div.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${p.id}')">
+        <span class="phase-number">${p.number}</span>
+        <span class="phase-title">${p.title}</span>
+        <span class="phase-badge" id="badge-${p.id}">0/${p.items.length}</span>
+        <span class="phase-arrow open" id="arrow-${p.id}">&#9660;</span>
+      </div>
+      <div class="phase-body" id="body-${p.id}">
+        ${p.items.map(i => `
+          <div class="item" id="item-${i.id}" onclick="toggleItem('${i.id}')">
+            <div class="checkbox" id="cb-${i.id}">
+              <svg class="checkmark" viewBox="0 0 11 8">
+                <path d="M1 4L4 7L10 1"/>
+              </svg>
+            </div>
+            <div class="item-content">
+              <div class="item-text">${i.text}</div>
+              ${i.note ? `<div class="item-note">${i.note}</div>` : ''}
+              ${i.link ? `<a class="item-link" href="${i.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open form ↗</a>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+  updateProgress();
+}
+
+render();
+</script>
+</body>
+</html>
