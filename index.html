@@ -3,56 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Planning — Boston Women in Bioinformatics</title>
+  <title>Event Resources — BWiB</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green:       #1a7f5a;
-      --green-light: #e6f4ef;
-      --green-mid:   #b2ddd0;
-      --green-dark:  #0f5940;
-      --green-hover: #165f44;
-      --text:        #1a1a1a;
-      --text-2:      #4a4a4a;
-      --text-3:      #888;
-      --border:      #e4e4e0;
-      --bg:          #fafaf8;
-      --surface:     #ffffff;
-      --nav-h:       64px;
+      /* Pastel rainbow — pulled from the BWiB logo rings */
+      --pink:   #f5b8c8;
+      --orange: #f9c98a;
+      --yellow: #f7e07a;
+      --green:  #a6d8a0;
+      --teal:   #84cccc;
+      --blue:   #a8c8e8;
+      --purple: #c4b4ec;
+
+      --text:   #1a1a1a;
+      --text-2: #555;
+      --text-3: #999;
+      --border: #e5e5e5;
+      --bg:     #ffffff;
+      --surface:#f6f6f6;
     }
 
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-family: 'DM Sans', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
 
+    /* ── RAINBOW STRIPE ── */
+    .rainbow-stripe {
+      height: 5px;
+      background: linear-gradient(to right,
+        var(--pink)   0%    14.3%,
+        var(--orange) 14.3% 28.6%,
+        var(--yellow) 28.6% 42.9%,
+        var(--green)  42.9% 57.1%,
+        var(--teal)   57.1% 71.4%,
+        var(--blue)   71.4% 85.7%,
+        var(--purple) 85.7% 100%
+      );
+    }
+
     /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: var(--bg);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
       padding: 0 2rem;
     }
 
     .nav-inner {
-      max-width: 1100px;
-      width: 100%;
+      max-width: 860px;
       margin: 0 auto;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,650 +73,417 @@
       color: var(--text);
     }
 
-    .nav-logo {
-      width: 34px;
-      height: 34px;
-      background: var(--green);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+    .nav-ring { width: 28px; height: 28px; flex-shrink: 0; }
 
-    .nav-logo svg { width: 20px; height: 20px; }
+    .nav-brand-name { font-size: 15px; font-weight: 600; }
 
-    .nav-brand-text {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    .nav-brand-sub {
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--text-3);
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.04em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
+    .nav-chip {
+      font-size: 13px;
       font-weight: 500;
       color: var(--text-2);
       text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: background 0.15s, color 0.15s;
+      padding: 6px 14px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.15s;
+    }
+    .nav-chip:hover { background: #e8e8e8; }
+
+    /* ── PAGE INTRO ── */
+    .intro {
+      padding: 52px 2rem 36px;
+      max-width: 860px;
+      margin: 0 auto;
     }
 
-    .nav-links a:hover { background: var(--green-light); color: var(--green-dark); }
-    .nav-links a.active { color: var(--green); }
-
-    .nav-cta {
-      font-size: 14px;
+    .intro-label {
+      font-size: 12px;
       font-weight: 600;
-      color: #fff !important;
-      background: var(--green) !important;
-      padding: 7px 16px !important;
-      border-radius: 999px !important;
-      transition: background 0.15s !important;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+      margin-bottom: 12px;
     }
 
-    .nav-cta:hover { background: var(--green-hover) !important; }
+    .intro h1 {
+      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
 
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, #2a9d78 100%);
-      color: #fff;
-      padding: 96px 2rem 80px;
-      text-align: center;
+    .intro p {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      max-width: 480px;
+    }
+
+    /* ── CHECKLIST CARD ── */
+    .checklist-wrap {
+      padding: 0 2rem 52px;
+    }
+
+    .checklist-wrap-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .checklist-card {
+      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      background: #fdfcff;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    /* rainbow left accent bar */
+    .checklist-card::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom,
+        var(--pink), var(--orange), var(--yellow),
+        var(--green), var(--teal), var(--blue), var(--purple)
+      );
     }
 
-    .hero-inner {
-      max-width: 740px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green-light);
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 4px 14px;
-      border-radius: 999px;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
+    .card-title {
+      font-size: 1.1rem;
       font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--green-light);
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 480px;
+      margin-bottom: 14px;
     }
 
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,0.82);
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-      font-weight: 400;
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 999px;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .t-pink   { background: #fde8ef; color: #903050; }
+    .t-orange { background: #fef0dc; color: #7a4a18; }
+    .t-yellow { background: #fef8d8; color: #6a5808; }
+    .t-green  { background: #e4f5e2; color: #246022; }
+    .t-teal   { background: #d8f2f2; color: #1a5858; }
+    .t-blue   { background: #e0eef8; color: #1e4888; }
 
-    .btn {
+    .btn-open {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      font-size: 15px;
+      gap: 8px;
+      font-size: 14px;
       font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 999px;
+      padding: 11px 20px;
+      border-radius: 10px;
       text-decoration: none;
-      transition: all 0.18s;
-      cursor: pointer;
-      border: none;
+      color: var(--text);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
       font-family: inherit;
     }
 
-    .btn-white {
-      background: #fff;
-      color: var(--green-dark);
+    .btn-open:hover {
+      background: #edeafc;
+      border-color: var(--purple);
     }
 
-    .btn-white:hover { background: var(--green-light); }
-
-    .btn-outline {
-      background: transparent;
-      color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.5);
+    /* ── PHASES ── */
+    .phases {
+      padding: 48px 2rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
     }
 
-    .btn-outline:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+    .phases-inner { max-width: 860px; margin: 0 auto; }
 
-    .btn-green {
-      background: var(--green);
-      color: #fff;
-    }
-
-    .btn-green:hover { background: var(--green-hover); }
-
-    /* ── SECTIONS ── */
-    section { padding: 72px 2rem; }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-3);
+      margin-bottom: 18px;
       text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.6rem;
-      display: block;
+      letter-spacing: 0.06em;
     }
-
-    .section-title {
-      font-size: clamp(1.5rem, 3vw, 2.1rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-lead {
-      font-size: 1.05rem;
-      color: var(--text-2);
-      max-width: 560px;
-      margin-bottom: 3rem;
-    }
-
-    /* ── PHASES GRID ── */
-    .phases { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
     .phases-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
     }
 
-    .phase-card {
+    .phase {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: border-color 0.18s, box-shadow 0.18s;
+      border-left: 4px solid transparent;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
     }
 
-    .phase-card:hover {
-      border-color: var(--green-mid);
-      box-shadow: 0 4px 20px rgba(26,127,90,0.08);
-    }
+    .phase-1 { border-left-color: var(--pink);   }
+    .phase-2 { border-left-color: var(--orange);  }
+    .phase-3 { border-left-color: var(--yellow);  }
+    .phase-4 { border-left-color: var(--green);   }
+    .phase-5 { border-left-color: var(--teal);    }
+    .phase-6 { border-left-color: var(--purple);  }
 
     .phase-num {
-      font-family: 'DM Mono', monospace;
       font-size: 11px;
-      font-weight: 500;
-      color: var(--green);
-      background: var(--green-light);
-      border: 1px solid var(--green-mid);
-      padding: 2px 9px;
-      border-radius: 999px;
-      display: inline-block;
-      margin-bottom: 0.85rem;
-    }
-
-    .phase-card h3 {
-      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
+      color: var(--text-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
     }
 
-    .phase-card p {
-      font-size: 14px;
-      color: var(--text-2);
-      line-height: 1.55;
+    .phase h3 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .phase p  { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── CONTACTS ── */
+    .contacts {
+      padding: 44px 2rem;
+      border-top: 1px solid var(--border);
     }
 
-    .phase-items {
-      margin-top: 0.85rem;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
+    .contacts-inner { max-width: 860px; margin: 0 auto; }
 
-    .phase-item {
-      font-size: 13px;
-      color: var(--text-2);
-      display: flex;
-      align-items: flex-start;
+    .contacts-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
       gap: 8px;
-    }
-
-    .phase-item::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      min-width: 5px;
-      background: var(--green-mid);
-      border-radius: 50%;
-      margin-top: 7px;
-    }
-
-    /* ── CHECKLIST CTA ── */
-    .checklist-cta {
-      background: linear-gradient(135deg, var(--green-light) 0%, #f0faf5 100%);
-      border: 1px solid var(--green-mid);
-    }
-
-    .cta-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem 3rem;
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-      box-shadow: 0 2px 24px rgba(26,127,90,0.07);
-    }
-
-    .cta-icon {
-      width: 72px;
-      height: 72px;
-      min-width: 72px;
-      background: var(--green);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cta-icon svg { width: 38px; height: 38px; }
-
-    .cta-body { flex: 1; }
-
-    .cta-body h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
-
-    .cta-body p {
-      font-size: 15px;
-      color: var(--text-2);
-      margin-bottom: 1.25rem;
-      max-width: 480px;
-    }
-
-    /* ── CONNECT ── */
-    .connect { background: var(--surface); border-top: 1px solid var(--border); }
-
-    .connect-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    .connect-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
       color: var(--text);
-      background: var(--bg);
-      transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
-      display: block;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.15s;
     }
 
-    .connect-card:hover {
-      border-color: var(--green-mid);
-      box-shadow: 0 4px 20px rgba(26,127,90,0.09);
-      transform: translateY(-2px);
-    }
-
-    .connect-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: var(--green-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-
-    .connect-icon svg { width: 22px; height: 22px; color: var(--green); }
-
-    .connect-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-    .connect-card p  { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+    .contact-link:hover { background: #e8e8e8; }
+    .contact-link svg { width: 15px; height: 15px; color: var(--text-3); flex-shrink: 0; }
 
     /* ── FOOTER ── */
     footer {
-      background: #111;
-      color: rgba(255,255,255,0.55);
-      padding: 2.5rem 2rem;
-      font-size: 14px;
+      border-top: 1px solid var(--border);
+      padding: 18px 2rem;
     }
 
     .footer-inner {
-      max-width: 1100px;
+      max-width: 860px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-3);
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 8px;
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-logo {
-      width: 28px;
-      height: 28px;
-      background: var(--green);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .footer-logo svg { width: 16px; height: 16px; }
-
-    .footer-name {
-      color: rgba(255,255,255,0.8);
-      font-weight: 600;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+    .footer-inner a { color: var(--text-3); text-decoration: none; }
+    .footer-inner a:hover { color: var(--text); }
 
     /* ── RESPONSIVE ── */
-    .nav-links { display: flex; }
-
-    @media (max-width: 680px) {
-      .nav-links li:not(:last-child) { display: none; }
-      .cta-card { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
-      .cta-icon { width: 56px; height: 56px; min-width: 56px; }
-      .cta-body p { max-width: 100%; }
-      section { padding: 52px 1.25rem; }
+    @media (max-width: 620px) {
+      .checklist-card { grid-template-columns: 1fr; }
+      .intro, .checklist-wrap, .phases, .contacts { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .checklist-card { padding: 1.5rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
+  <div class="rainbow-stripe"></div>
+
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-brand" href="https://boston-wib.org/">
-        <div class="nav-logo">
-          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="7" r="3.5" stroke="white" stroke-width="1.6"/>
-            <path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="nav-brand-text">BWiB</div>
-          <div class="nav-brand-sub">Boston Women in Bioinformatics</div>
-        </div>
+      <a class="nav-brand" href="#">
+        <!-- Concentric rainbow rings, echoing the BWiB logo -->
+        <svg class="nav-ring" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="11" stroke="url(#ring-a)" stroke-width="2.4" fill="none"/>
+          <circle cx="14" cy="14" r="7"  stroke="url(#ring-b)" stroke-width="2"   fill="none"/>
+          <circle cx="14" cy="14" r="3"  stroke="url(#ring-c)" stroke-width="1.6" fill="none"/>
+          <defs>
+            <linearGradient id="ring-a" x1="3" y1="3" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f5b8c8"/>
+              <stop offset="0.4" stop-color="#f9c98a"/>
+              <stop offset="0.7" stop-color="#a6d8a0"/>
+              <stop offset="1"   stop-color="#84cccc"/>
+            </linearGradient>
+            <linearGradient id="ring-b" x1="7" y1="7" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a8c8e8"/>
+              <stop offset="1"  stop-color="#c4b4ec"/>
+            </linearGradient>
+            <linearGradient id="ring-c" x1="11" y1="11" x2="17" y2="17" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f7e07a"/>
+              <stop offset="1"  stop-color="#f5b8c8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="nav-brand-name">BWiB Event Resources</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="https://boston-wib.org/">Home</a></li>
-        <li><a href="https://boston-wib.org/team">Team</a></li>
-        <li><a href="https://boston-wib.org/blog">Blog</a></li>
-        <li><a href="BWiB_Event_Planning_Checklist.html" class="nav-cta">Planning checklist ↗</a></li>
-      </ul>
+      <a class="nav-chip" href="BWiB_Event_Planning_Checklist.html">Planning checklist ↗</a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-tag">Boston Women in Bioinformatics</div>
-      <h1>Plan your next<br><em>BWiB event</em> with confidence</h1>
-      <p class="hero-sub">
-        Everything you need to organize a successful BWiB community event —
-        from the first idea to the follow-up email.
-      </p>
-      <div class="hero-actions">
-        <a href="BWiB_Event_Planning_Checklist.html" class="btn btn-white">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-          Open the planning checklist
+  <!-- PAGE INTRO -->
+  <div class="intro">
+    <div class="intro-label">Boston Women+ in Bioinformatics</div>
+    <h1>Event Planning Hub</h1>
+    <p>Internal resources for BWiB members organizing community events.</p>
+  </div>
+
+  <!-- CHECKLIST CARD -->
+  <div class="checklist-wrap">
+    <div class="checklist-wrap-inner">
+      <div class="checklist-card">
+        <div>
+          <div class="card-title">BWiB Event Planning Checklist</div>
+          <div class="card-desc">
+            Interactive checklist covering all six phases — from event concept through follow-up.
+            Check items off as you go; progress is saved in your browser.
+          </div>
+          <div class="tag-row">
+            <span class="tag t-pink">Concept</span>
+            <span class="tag t-orange">Logistics</span>
+            <span class="tag t-yellow">Promotion</span>
+            <span class="tag t-green">Registration</span>
+            <span class="tag t-teal">Event day</span>
+            <span class="tag t-blue">Follow-up</span>
+          </div>
+        </div>
+        <a href="BWiB_Event_Planning_Checklist.html" class="btn-open">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          Open checklist
         </a>
-        <a href="https://boston-wib.org/" class="btn btn-outline">Visit boston-wib.org ↗</a>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- PHASES -->
-  <section class="phases">
-    <div class="section-inner">
-      <span class="section-tag">Six phases</span>
-      <h2 class="section-title">From idea to follow-up</h2>
-      <p class="section-lead">The checklist walks you through every step. Here's what's covered.</p>
-
+  <div class="phases">
+    <div class="phases-inner">
+      <div class="section-label">What's covered</div>
       <div class="phases-grid">
 
-        <div class="phase-card">
-          <span class="phase-num">01</span>
+        <div class="phase phase-1">
+          <div class="phase-num">Phase 01</div>
           <h3>Event concept</h3>
-          <p>Shape your idea into a clear, compelling event people will want to attend.</p>
-          <div class="phase-items">
-            <div class="phase-item">Write a one-sentence hook</div>
-            <div class="phase-item">Draft the event description</div>
-            <div class="phase-item">Set capacity &amp; target audience</div>
-            <div class="phase-item">Write the call to action</div>
-          </div>
+          <p>One-sentence hook, description, target audience &amp; call to action</p>
         </div>
 
-        <div class="phase-card">
-          <span class="phase-num">02</span>
+        <div class="phase phase-2">
+          <div class="phase-num">Phase 02</div>
           <h3>Logistics</h3>
-          <p>Lock in the practical details — venue, date, speakers, and funding.</p>
-          <div class="phase-items">
-            <div class="phase-item">Confirm speakers or facilitators</div>
-            <div class="phase-item">Book venue or create virtual link</div>
-            <div class="phase-item">Lock the date and time</div>
-            <div class="phase-item">Identify a sponsor if needed</div>
-          </div>
+          <p>Speakers, venue, date, and sponsor coordination</p>
         </div>
 
-        <div class="phase-card">
-          <span class="phase-num">03</span>
+        <div class="phase phase-3">
+          <div class="phase-num">Phase 03</div>
           <h3>Promotion</h3>
-          <p>Get the word out at least two weeks before the event.</p>
-          <div class="phase-items">
-            <div class="phase-item">Submit the BWiB promotion request form</div>
-            <div class="phase-item">Write the newsletter blurb</div>
-            <div class="phase-item">Draft the social media post</div>
-            <div class="phase-item">Prepare the full event description</div>
-          </div>
+          <p>Promotion request form, newsletter blurb, social posts</p>
         </div>
 
-        <div class="phase-card">
-          <span class="phase-num">04</span>
+        <div class="phase phase-4">
+          <div class="phase-num">Phase 04</div>
           <h3>Registration (Lu.ma)</h3>
-          <p>Set up the event page in the BWiB Lu.ma workspace and publish it.</p>
-          <div class="phase-items">
-            <div class="phase-item">Create the Lu.ma event page</div>
-            <div class="phase-item">Add registration questions</div>
-            <div class="phase-item">Upload a cover image</div>
-            <div class="phase-item">Preview on mobile, then publish</div>
-          </div>
+          <p>Event page setup, registration questions, cover image, publish</p>
         </div>
 
-        <div class="phase-card">
-          <span class="phase-num">05</span>
+        <div class="phase phase-5">
+          <div class="phase-num">Phase 05</div>
           <h3>Event day</h3>
-          <p>Make sure everything runs smoothly on the day itself.</p>
-          <div class="phase-items">
-            <div class="phase-item">Send reminder email 24–48 hours before</div>
-            <div class="phase-item">Share prep materials with attendees</div>
-            <div class="phase-item">Test AV, virtual link, or room setup</div>
-          </div>
+          <p>Reminder email, prep materials, AV and room check</p>
         </div>
 
-        <div class="phase-card">
-          <span class="phase-num">06</span>
+        <div class="phase phase-6">
+          <div class="phase-num">Phase 06</div>
           <h3>Follow-up</h3>
-          <p>Close the loop with attendees, sponsors, and your team.</p>
-          <div class="phase-items">
-            <div class="phase-item">Send a follow-up email within 48 hours</div>
-            <div class="phase-item">Include a short feedback form</div>
-            <div class="phase-item">Thank sponsors, speakers &amp; volunteers</div>
-            <div class="phase-item">Share feedback with the organizing team</div>
-          </div>
+          <p>Follow-up email, feedback form, thank-you notes</p>
         </div>
 
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CHECKLIST CTA -->
-  <section class="checklist-cta">
-    <div class="section-inner">
-      <div class="cta-card">
-        <div class="cta-icon">
-          <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="7" y="4" width="24" height="30" rx="3" stroke="white" stroke-width="2"/>
-            <path d="M13 13h12M13 19h12M13 25h7" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="28" cy="28" r="7" fill="#0f5940"/>
-            <path d="M25 28l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- CONTACTS -->
+  <div class="contacts">
+    <div class="contacts-inner">
+      <div class="section-label">Questions? Reach us at</div>
+      <div class="contacts-row">
+
+        <a class="contact-link" href="mailto:events@boston-wib.org">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
-        </div>
-        <div class="cta-body">
-          <h2>Ready to start planning?</h2>
-          <p>
-            Open the interactive checklist to track your progress through all six phases.
-            Check off items as you go — the page remembers your progress in your browser.
-          </p>
-          <a href="BWiB_Event_Planning_Checklist.html" class="btn btn-green">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-            Open the planning checklist
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONNECT -->
-  <section class="connect">
-    <div class="section-inner">
-      <span class="section-tag">Get involved</span>
-      <h2 class="section-title">Let's connect</h2>
-      <p class="section-lead">Questions about organizing an event? Reach us through any of these channels.</p>
-
-      <div class="connect-grid">
-
-        <a class="connect-card" href="mailto:events@boston-wib.org">
-          <div class="connect-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </div>
-          <h3>Email events</h3>
-          <p>events@boston-wib.org — for promotion requests, questions, and feedback.</p>
+          events@boston-wib.org
         </a>
 
-        <a class="connect-card" href="https://lu.ma/bwib" target="_blank" rel="noopener">
-          <div class="connect-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3>Events calendar</h3>
-          <p>Browse and register for upcoming BWiB events on Lu.ma.</p>
+        <a class="contact-link" href="https://lu.ma/bwib" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8"  y1="2" x2="8"  y2="6"/>
+            <line x1="3"  y1="10" x2="21" y2="10"/>
+          </svg>
+          lu.ma/bwib — events calendar
         </a>
 
-        <a class="connect-card" href="https://www.linkedin.com/company/boston-women-in-bioinformatics" target="_blank" rel="noopener">
-          <div class="connect-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </div>
-          <h3>LinkedIn</h3>
-          <p>Follow us for event announcements and community news.</p>
+        <a class="contact-link" href="https://www.linkedin.com/company/boston-women-in-bioinformatics" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
         </a>
 
-        <a class="connect-card" href="https://boston-wib.org/" target="_blank" rel="noopener">
-          <div class="connect-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <h3>Website</h3>
-          <p>Visit boston-wib.org to learn more about who we are and what we do.</p>
+        <a class="contact-link" href="https://boston-wib.org/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          boston-wib.org
         </a>
 
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="7" r="3.5" stroke="white" stroke-width="1.6"/>
-            <path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="footer-name">Boston Women in Bioinformatics</span>
-      </div>
-      <ul class="footer-links">
-        <li><a href="https://boston-wib.org/">Home</a></li>
-        <li><a href="https://boston-wib.org/team">Team</a></li>
-        <li><a href="mailto:events@boston-wib.org">Contact</a></li>
-        <li><a href="BWiB_Event_Planning_Checklist.html">Checklist</a></li>
-      </ul>
+      <span>Boston Women+ in Bioinformatics &mdash; Event Planning Resources</span>
+      <a href="https://boston-wib.org/" target="_blank" rel="noopener">boston-wib.org ↗</a>
     </div>
   </footer>
 
